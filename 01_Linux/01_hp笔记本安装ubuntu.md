@@ -16,7 +16,7 @@ https://cloud.tencent.com/developer/article/1046051
 
 ### 制作Linux系统U盘
 
-- 准备一个超过5GB的U盘，备份其中的数据因为后续要格式化
+- 准备一个超过5GB的U盘，备份其中的数据到其他的移动硬盘因为后续要格式化这个U盘，所有数据都没用了
 - 官网下载ubuntu的iso镜像文件
 - [软碟通官网](https://cn.ultraiso.net/xiazai.html) 下载utraiso，试用版即可，只要能够在U盘作出一个启动盘
   
@@ -48,6 +48,21 @@ https://cloud.tencent.com/developer/article/1046051
 
 
 ## 20180520 ubuntu下运行windows程序
+
+不得不承认某些APP在windows下是很友好的，比如notepad++，在linux下不能直接使用。
+
+在我们从Windows过渡到Ubuntu后，很多本来在Windows上玩的很熟的软件却无法在Ubuntu上运行。如果说应用软件还能在Ubuntu 上找到相应的替代品的话，那么Windows上的游戏就真的没辙了，现在热门的一些游戏几乎都没有Linux版本，当然也就无法在Ubuntu上运行了。 很多人虽然对Linux抱有很大的兴趣，但仍旧无法摆脱Windows，因为你不得不面对Linux上复杂的软件应用和无法运行热门游戏的现实。不过现在 Linux已经不再像以前那样和Windows毫无瓜葛了，我们只要借助一款名为“Wine”的软件就可以架起Linux和Windows的桥梁，在 Ubuntu上运行Win程序和游戏不再是梦想。
+
+### 什么是Wine？
+
+[Wine](https://www.winehq.org/)是 Wine Is Not an Emulator 的所写，是一个在Xwindows和Unix上执行的Windows APIs，也可以认为Wine是一个Windows兼容层。通过Wine，我们可以在Ubuntu中运行windows程序。
+
+在Ubuntu中，可以通过两种方法安装Wine，一种是自己编译Wine代码，另一种是直接下载安装。自己编译Wine代码的好处是编译好的Wine兼 容性好，在运行程序时很少会出现问题，比较稳定，缺点是步骤麻烦。下载安装Wine的好处自然是方便，缺点就是不稳定，经常容易出现问题。这里还是推荐大 家自己编译Wine，如果编译不成功，再通过下载安装Wine。
+
+因为只想快速使用notepad++，我选择了[直接下载的方式](https://wiki.winehq.org/Ubuntu)
+
+参考连接：
+https://blog.51cto.com/vincent/100851
 
 
 ## 20180527 ubuntu配置shadowsocks client
