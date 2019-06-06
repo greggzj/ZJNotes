@@ -66,3 +66,14 @@ https://blog.51cto.com/vincent/100851
 
 
 ## 20180527 ubuntu配置shadowsocks client
+
+
+
+## 20190605 戴尔台式机安装Ubuntu的坑
+
+
+## 20190606 安装完ubuntu后要做的事情
+
+### 下载安装chrome
+
+https://www.google.cn/intl/zh-CN/chrome/
