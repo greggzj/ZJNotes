@@ -46,14 +46,79 @@ https://cloud.tencent.com/developer/article/1046051
 - 根据傻瓜式的引导来安装ubuntu
 
 
+### 分区
 
-## 20180520 ubuntu下运行windows程序
+在安装过程中分区感觉比较重要，如果选择傻瓜式默认分区，那就只有一个分区，没有/home分区意味着如果要重装，所有数据都会丢失。
+
+如果有/home 分区，那么在重装时可以选择不去擦除该分区的数据，很多数据可以得以保留。
+
+下面摘抄一段网上经验：
+
+创建主分区： 150G 主分区 空间起始位置 分区格式为ext4 /
+建议：安装系统和软件，分区尽量大设置大点
+
+创建swap分区：2048MB 逻辑分区 空间起始位置 分区格式为swap 
+
+交换分区相当于Windows中的“虚拟内存”，如果物理内存小于或等于512MB，建议分配交换分区的大小为物理内存容量的2倍；如果物理内存大于512MB，建议分配交换分区的大小等于物理内存容量；如果您的内存够大也可以不建立交换分区。
+
+创建boot分区：1GB 逻辑分区 空间起始位置 分区格式为ext4 /boot
+建议：400MB或1GB
+启动分区，包含操作系统内核和启动的程序
+
+创建home分区: 剩余的空间 逻辑分区 空间起始位置 分区格式为ext4 /home
+建议： 相当于“我的文档”，分区尽量大设置大点
+
+![fdisk](./resource/ubuntu_fdisk.png)
+
+参考：
+ - https://zhuanlan.zhihu.com/p/35294113
+ - https://link.zhihu.com/?target=https%3A//blog.csdn.net/u012052268/article/details/77145427
+
+
+
+
+
+## 戴尔台式机安装Ubuntu的坑
+
+本来以为台式机上面安装ubuntu更为简单，没想到还是要折腾一番。今天被戴尔台式机坑了一把。
+
+### 硬盘模式设置为ACHI
+
+进行安装时，看不到任何挂载盘，也就是说只能够识别安装的U盘，其他硬盘ubuntu看不到。
+
+问题原因：DELL电脑BIOS中设置的SATA为RAID模式，而ubuntu不支持RAID模式，需要修改为ACHI模式。
+
+解决方法: 开机f2进入BIOS 设置SATA模式
+
+参考：
+- https://blog.csdn.net/tulip561/article/details/73929512
+
+### efi分区
+
+由于目前电脑快速EFI启动，需要预留一个EFI分区(512 MB?  EXT4格式？)。
+
+
+## ubuntu配置shadowsocks client
+
+
+
+
+
+
+## 安装完ubuntu后要做的事情
+
+### 下载安装chrome
+
+https://www.google.cn/intl/zh-CN/chrome/
+
+
+### ubuntu下运行windows程序——Wine
 
 不得不承认某些APP在windows下是很友好的，比如notepad++，在linux下不能直接使用。
 
 在我们从Windows过渡到Ubuntu后，很多本来在Windows上玩的很熟的软件却无法在Ubuntu上运行。如果说应用软件还能在Ubuntu 上找到相应的替代品的话，那么Windows上的游戏就真的没辙了，现在热门的一些游戏几乎都没有Linux版本，当然也就无法在Ubuntu上运行了。 很多人虽然对Linux抱有很大的兴趣，但仍旧无法摆脱Windows，因为你不得不面对Linux上复杂的软件应用和无法运行热门游戏的现实。不过现在 Linux已经不再像以前那样和Windows毫无瓜葛了，我们只要借助一款名为“Wine”的软件就可以架起Linux和Windows的桥梁，在 Ubuntu上运行Win程序和游戏不再是梦想。
 
-### 什么是Wine？
+#### 什么是Wine？
 
 [Wine](https://www.winehq.org/)是 Wine Is Not an Emulator 的所写，是一个在Xwindows和Unix上执行的Windows APIs，也可以认为Wine是一个Windows兼容层。通过Wine，我们可以在Ubuntu中运行windows程序。
 
@@ -63,17 +128,3 @@ https://cloud.tencent.com/developer/article/1046051
 
 参考连接：
 https://blog.51cto.com/vincent/100851
-
-
-## 20180527 ubuntu配置shadowsocks client
-
-
-
-## 20190605 戴尔台式机安装Ubuntu的坑
-
-
-## 20190606 安装完ubuntu后要做的事情
-
-### 下载安装chrome
-
-https://www.google.cn/intl/zh-CN/chrome/

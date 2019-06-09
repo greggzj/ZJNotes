@@ -9,6 +9,9 @@
 
 ![image1](./resource/v1.PNG)
 
+使用bridge桥接方式能够使得windows主机host和guest linux互相ping通。具体配置方式为在virtualbox settings --> Network中配置一个Bridged Apater方式的Adapter，如上图。
+
+需要注意的是，Name:  这个field表示虚拟机的Adapter走的数据流是通过主机哪个网卡，之前默认选了无线wireless网卡（不行），这里选择的是主机的ethernet网卡。
 
 https://blog.csdn.net/beijihukk/article/details/53522681
 
