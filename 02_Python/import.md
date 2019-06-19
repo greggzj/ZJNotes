@@ -43,3 +43,54 @@ https://stackoverflow.com/questions/16981921/relative-imports-in-python-3
 
 
 ## Python模块内部正确的import
+当代码组织成为python package后，如果在这个package内一个Module想要导入另一个也在这个pakcage中的Module，可以考虑relative import
+
+```
+mypackage/
+    __init__.py
+    A/
+        __init__.py
+        spam.py
+        grok.py
+    B/
+        __init__.py
+        bar.py
+```
+
+### 如果模块mypackage.A.spam要导入同目录下的模块grok
+
+```
+# mypackage/A/spam.py
+from . import grok
+```
+
+### 如果模块mypackage.A.spam要导入不同目录下的模块B.bar
+
+```
+# mypackage/A/spam.py
+from ..B import bar
+```
+
+### 语法
+* 对于python3, 在包内，既可以使用相对路径也可以使用绝对路径来导入
+```
+# mypackage/A/spam.py
+from mypackage.A import grok # OK
+from . import grok # OK
+import grok # Error (not found)
+```
+* .为当前目录，..B为目录../B
+* 这种语法只适用于import
+```
+from . import grok # OK
+import .grok # ERROR
+```
+* 使用相对导入看起来像是浏览文件系统，但是不能到定义包的目录之外
+* relative import 只适用于library中Module之间的导入，如果要单独运行library中某个module中的某个python文件，该文件中的relative import就会报错，这个错误就是本文最开头的错误
+```
+% python3 mypackage/A/spam.py # Relative imports fail
+```
+解决办法是有的，使用`python -m`选项，学习了：
+```
+% python3 -m mypackage.A.spam # Relative imports work
+```
