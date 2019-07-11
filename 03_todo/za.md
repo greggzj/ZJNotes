@@ -1,8 +1,28 @@
 
-forum 
-lib
-review
+
+
+forum issue track reference
+
+https://github.com/urllib3/urllib3/issues/1641
+
+- forum return finish
+
+- lib finish
+
+- review
+
+
+
 fluepy ##
+
+zl: 
+
+https://tools.ietf.org/html/rfc3986.html
+
+https://tools.ietf.org/html/rfc6874.html
+
+
+
 
 
 
