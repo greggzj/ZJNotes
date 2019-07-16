@@ -5,7 +5,8 @@
 
 fluepy ##
 
-zl: 
+zl: network  plus ipv6
+lib doc
 
 https://tools.ietf.org/html/rfc3986.html
 
