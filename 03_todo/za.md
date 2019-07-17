@@ -5,11 +5,8 @@
 
 fluepy ##
 
-dhcp lib allocate solid address
 zl: network  plus ipv6
 
-lib doc
-review
 
 https://tools.ietf.org/html/rfc3986.html
 
