@@ -5,16 +5,6 @@
 
 fluepy ##
 
-zl: network  plus ipv6
-
-
-https://tools.ietf.org/html/rfc3986.html
-
-https://tools.ietf.org/html/rfc6874.html
-
-https://mirrors.deepspace6.net/howtos/Linux+IPv6-HOWTO/x1144.html
-
-
 
 
 

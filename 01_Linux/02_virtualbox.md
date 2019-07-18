@@ -7,7 +7,7 @@
 
 ### VirtualBox network setting
 
-![image1](./resource/v1.PNG)
+![image1](./resource/v1.PNG?raw=true)
 
 使用bridge桥接方式能够使得windows主机host和guest linux互相ping通。具体配置方式为在virtualbox settings --> Network中配置一个Bridged Apater方式的Adapter，如上图。
 
