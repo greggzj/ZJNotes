@@ -218,9 +218,15 @@ https://mirrors.deepspace6.net/howtos/Linux%2BIPv6-HOWTO/index.html
 
 - Ipv6如何访问
 
-格式[XX.XX.XX.XX%AA]:port
+**格式[XX.XX.XX.XX%AA]:port**
 
 其中百分号分割了interface(zone id)部分和network address部分，因为IPV6下一个Interface可以有多个IPV6地址，因此每个IPV6的请求都需要加上用于识别通过哪个interface的标号，用zone id表示。
+
+**Linux下ping IPV6**
+```
+ping6 -I eth0 fe80::21a:a5ff:fec1:1060
+```
+
 
 参考：
 https://tools.ietf.org/html/rfc3986.html
