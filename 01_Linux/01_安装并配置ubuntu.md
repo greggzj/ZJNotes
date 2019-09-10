@@ -128,3 +128,8 @@ https://www.google.cn/intl/zh-CN/chrome/
 
 参考连接：
 https://blog.51cto.com/vincent/100851
+
+
+### 配置阿里镜像使用apt-get update速度更快
+
+https://blog.csdn.net/feiniao8651/article/details/60332535
