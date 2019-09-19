@@ -6,7 +6,7 @@
 
 [1] [官网树莓派版本对应Firmware和论坛](https://openwrt.org/toh/raspberry_pi_foundation/raspberry_pi)
 
-[2] [独立package下载地址(如python, luci)](http://downloads.openwrt.org/releases/18.06.4/packages/aarch64_cortex-a53/packages/)
+[2] [独立package下载地址(如python, luci在外部同级目录下)](http://downloads.openwrt.org/releases/18.06.4/packages/aarch64_cortex-a53/packages/)
 
 [3] [UI界面配置LUCI的独立安装](https://openwrt.org/docs/guide-user/luci/luci.essentials)
 
@@ -53,9 +53,27 @@ commit后会报I/O error，瞬间觉得此版本可能有诈，果不其然，�
 
 
 
-## 配置联网
+## 配置连接网络
 
+连接Internet主要目的是使用opkg来安装一些Package：
 
+- 将树莓派网线直连外网，或者上级路由器，而后配置vi /etc/config/network
+
+```
+config interface 'lan'
+        #option type 'bridge'
+        option ifname 'eth0'
+        option proto 'dhcp'
+        #option ipaddr '192.168.1.1'
+        #option netmask '255.255.255.0'
+        #option ip6assign '60'
+```
+
+- (optional，针对公司网络)vi /etc/opkg.conf，增加一行http代理
+
+```
+option http_proxy http://101.231.121.17:80/
+```
 
 
 
