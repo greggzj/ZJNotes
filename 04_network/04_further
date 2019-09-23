@@ -1,0 +1,22 @@
+
+## IPV6 global address
+
+```
+inet6 addr: fddd:d71b:c7dd:0:200:54ff:fe04:1200/64 Scope:Global
+```
+Global 地址由client与路由器通过MLD(?)协议协商而来(非DHCPV6)
+Link local 地址是固定的
+
+```
+root@rzn1-ep1:~# ifconfig
+eth0      Link encap:Ethernet  HWaddr 00:00:54:04:12:00
+          inet addr:192.168.1.40  Bcast:192.168.1.255  Mask:255.255.255.0
+          inet6 addr: fddd:d71b:c7dd:0:200:54ff:fe04:1200/64 Scope:Global
+          inet6 addr: fe80::200:54ff:fe04:1200/64 Scope:Link
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+          RX packets:13770 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:633 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000
+          RX bytes:1715696 (1.6 MiB)  TX bytes:132771 (129.6 KiB)
+          Interrupt:50 Base address:0x8000
+```
