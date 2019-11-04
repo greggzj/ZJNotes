@@ -77,3 +77,12 @@ option http_proxy http://101.231.121.17:80/
 
 
 
+## snapshot opkg install
+
+以下列出opkg install XXX中的XXX
+
+- wireless-tools  使用iwlist
+
+- 支持luci的jsonrpc接口：
+opkg install luci-mod-rpc
+/etc/init.d/uhttpd restart 
