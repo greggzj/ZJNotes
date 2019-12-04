@@ -13,6 +13,10 @@ interconnect all of the networks in the Internet; BGP is thus often referred to 
 
 
 
+# 5.6 ICMP: The Internet Control Message Protocol
+
+参考：https://www.saminiir.com/lets-code-tcp-ip-stack-2-ipv4-icmpv4/
+
 
 
 

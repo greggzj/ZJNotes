@@ -27,10 +27,25 @@ the packet to the appropriate output link.
 they flow from a sender to a receiver.
 
 
+Forwarding refers to the router-local action of transferring a packet from an input
+link interface to the appropriate output link interface. Forwarding takes place at very
+short timescales (typically a few nanoseconds), and thus is typically implemented in
+hardware. Routing refers to the network-wide process that determines the end-to-end
+paths that packets take from source to destination.
+
+
+- Forwarding table
+
+Control plan的routing 算法会决定forwarding table。(section 5.3/5.4)
 
 the routing algorithm (Control plane) determines the contents of the routers’ forwarding
 tables (Data plane).
 
+A router forwards
+a packet by examining the value of one or more fields in the arriving packet’s header,
+and then using these header values to index into its forwarding table. The value stored
+in the forwarding table entry for those values indicates the outgoing link interface at
+that router to which that packet is to be forwarded.
 
 
 # 4.2 What’s Inside a Router?
