@@ -1,5 +1,26 @@
 
 
+
+yield from syntax
+
+    prime automatically, 与yield不同，后者需要Prime
+
+
+yield return value获取方式， 与yield from 不同
+
+    Accumulator coroutines can yield back partial results with each send method call, but
+    they become more useful when they can return values, a feature that was added in
+    Python 3.3 with PEP 380. We saw how the statement return the_result in a generator
+    now raises StopIteration(the_result), allowing the caller to retrieve the_result
+    from the value attribute of the exception. This is a rather cumbersome way to retrieve
+    coroutine results, but it’s handled automatically by the yield from syntax introduced
+    in PEP 380.
+
+threads, callbacks, coroutines difference , good and bad
+
+
+
+
 ```
 import asyn
 
