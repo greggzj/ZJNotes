@@ -1,3 +1,63 @@
+
+
+# ubuntu 18 安装python3.7
+
+## 下载.tar.gz解压编译安装
+
+ubuntu18.04.3自带python3.6.9,如果要下载python3.7可以下载tar包解压安装：
+
+- sudo apt update
+- sudo apt install build-essential zlib1g-dev libncurses5-dev libgdbm-dev libnss3-dev libssl-dev libreadline-dev libffi-dev wget
+- cd /tmp
+- wget https://www.python.org/ftp/python/3.7.5/Python-3.7.5.tgz
+
+- 解压  tar –xf Python-3.7.5.tgz
+- cd python-3.7.5
+- ./configure ––enable–optimizations
+
+The ./configure command evaluates and prepares Python to install on your system. Using the ––optimization option speeds code execution by 10-20%.
+
+- 产生另一个python实例(python3.7)   sudo make altinstall
+
+推荐使用altinstall命令来产生另一个Python实例而不是覆盖原先
+
+- python3.7 --version -->ok!
+
+
+[参考链接](https://phoenixnap.com/kb/how-to-install-python-3-ubuntu)
+
+## 想要系统默认的Python3为python3.7
+
+不太建议这么做，这样就会让系统原生态的python变为自己安装的python版本，可能会有一些后果，但是如果一定要这么做：
+
+[方法一：](https://stackoverflow.com/questions/41986507/unable-to-set-default-python-version-to-python3-in-ubuntu)
+
+最后一个1是表示优先级
+```
+update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.7 1
+```
+
+[方法二：(未尝试，应该可行)](https://askubuntu.com/questions/1120474/setting-python3-to-version-3-7-on-wsl)
+
+
+## 可能产生的问题和解决办法
+
+### 如果在18.01上升级到Python3.7，使用默认pip3会报错：'lsb_release -a' returned non-zero exit status
+
+据说是ubuntu的bug
+
+```
+sudo mv /usr/bin/lsb_release /usr/bin/lsb_release_back
+```
+
+参考链接：
+https://github.com/pypa/pip/issues/4924
+https://askubuntu.com/questions/853377/error-with-lsb-release-a-in-ubuntu-16-04-xenial
+
+
+
+# ubuntu18 更新pip的bug
+
 直接在ubuntu18中使用sudo pip install pip --upgrade
 命令更新v9.0的pip会出错，更新后使用Pip命令时报错: no module named main
 

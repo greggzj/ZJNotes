@@ -75,7 +75,13 @@ https://cloud.tencent.com/developer/article/1046051
  - https://link.zhihu.com/?target=https%3A//blog.csdn.net/u012052268/article/details/77145427
 
 
+### 使用LVM选项来安装
 
+LVM据说提供了一个可以生成一个总的snapshot，以便于在系统每次重大变更后如果有异常crash可以用于backup。
+据说LVM很强大，还可以集成多个Harddisk到一起，在Ubuntu安装时有一个选项可以选择LVM(目前选择了LVM就无法分区。。)
+
+关于LVM的概念后续学习可以参考：
+https://askubuntu.com/questions/3596/what-is-lvm-and-what-is-it-used-for
 
 
 ## 戴尔台式机安装Ubuntu的坑
@@ -111,6 +117,12 @@ https://cloud.tencent.com/developer/article/1046051
 
 https://www.google.cn/intl/zh-CN/chrome/
 
+### 配置ssh
+
+```
+sudo apt update
+sudo apt install openssh-server
+```
 
 ### ubuntu下运行windows程序——Wine
 

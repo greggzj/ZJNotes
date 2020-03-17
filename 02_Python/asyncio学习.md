@@ -19,6 +19,7 @@ yield return value获取方式， 与yield from 不同
 threads, callbacks, coroutines difference , good and bad
 
 
+guido different yield/yield from
 
 
 ```
