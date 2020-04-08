@@ -84,6 +84,131 @@ Here are some additional ways to tweak how you call tcpdump.
 ```
 
 
+# Iperf
+
+[Iperf](https://iperf.fr/en/iperf-doc.php#tradeoff)是一个测试网络bandwidth的工具，目前由于需要测试switch的性能，因此使用了这个工具。链接中的网址是命令option大全，测试目前使用到Iperf2而非Iperf3。
+
+测试的基本配置为一台电脑作为client另一台作为server。
+
+参考链接：
+
+[基本命令1](https://www.cnblogs.com/shuqingstudy/p/10767414.html)
+[基本命令2](https://www.linode.com/docs/networking/diagnostics/install-iperf-to-diagnose-network-speed-in-linux/)
+
+
+## 测试switch性能简介
+以下是SB的一些测试switch端口转发的一些建议，供参考，基于这些，考虑使用的工具为Iperf:
+
+-	既然用了交换芯片，我们就要测试它的确实是硬件转发。可以使用PC机连接EP2的两个网口，用测试软件以不同的包大小进行冲包，看能达到的速率是什么；在冲包的过程中访问EP2的IP地址看有什么影响。愿意的话可以以单播、组播和广播包分类型冲包，看CPU是否会被冲死。
+-	测试多网口的linkup/down功能。插一根网线，两根网线，断一根和全断，查看服务通断的情况。特别注意DPWS、DHCP和FORUM服务是否正常。
+-	也可以测试一下网口的自动速率功能。就是和10M、100M、1000M相连，全双工、半双工是否能工作。
+-	有条件也可多对接几种SE网口设备，多使用几种线缆
+
+## 测试命令
+
+- IPV4发送接收TCP包
+
+```
+server: 打印信息1s间隔
+    iperf -s -i 1
+
+client:　1秒间隔,90M bandwith,持续2000秒,目标Server IPV4为192.168.1.30
+    iperf -c 192.168.1.30 -i 1 -b 90M -t 2000
+```
+
+- IPV6发送接收TCP包
+
+```
+server: 打印信息1s间隔
+    iperf -s -V -i 1
+
+client:　1秒间隔,90M bandwith,持续2000秒, 目标Server IPV6为fe80::5bad:11e3:fc4e:1ede,走enp0s3的interface
+    iperf -V -u -c fe80::5bad:11e3:fc4e:1ede%enp0s3 -b 90M -t 2000 -i 1
+```
+
+
+- IPV4发送接收UDP包
+
+```
+server: 打印信息1s间隔
+    iperf -s -u -i 1
+
+client:　1秒间隔,90M bandwith,持续2000秒
+    iperf -u -c 192.168.1.30 -i 1 -b 90M -t 2000
+```
+
+- IPV6发送接收UDP包
+
+```
+server: 打印信息1s间隔
+    iperf -s -V -u -i 1
+
+client:　1秒间隔,90M bandwith,持续2000秒
+    iperf -V -u -c fe80::5bad:11e3:fc4e:1ede%enp0s3 -b 90M -t 2000 -i 1
+```
+
+## 遇到的问题
+
+### 利用Iperf发送组播包
+
+#### 什么是组播
+参考004_multicast.md
+
+#### 用Iperf配置发送组播包(相同网段)PC需要配置什么
+
+不需要！
+
+利用下面的命令开启Iperf接受组播的server，由打印信息可知，Iperf启动后自动生成了一个组播绑定地址224.1.1.1，该地址也会体现在netstat -gn
+
+```
+iperf -s -u -B 224.1.1.1 -i 1
+------------------------------------------------------------
+Server listening on UDP port 5001
+Binding to local address 224.1.1.1
+Joining multicast group  224.1.1.1
+Receiving 1470 byte datagrams
+UDP buffer size:  110 KByte (default)
+------------------------------------------------------------
+```
+
+### 组播包发送不成功
+
+用一台server(双网卡，一个网卡连接公司网络另一个为本地网卡)与一个client PC(自己的台式机，开启Linux虚拟机)相连接，在server上开启`iperf -s -u -B 224.0.67.67 -i 1`，client连接后数据没有发送成功
+
+- netstat -gn发现224.0.67.67这个组播地址被绑定到了默认的连接公司网络的网卡，而目前Iperf2中-B选项在作为组播地址使用后，没有其他的option用来绑定特定的端口，比较傻，因此考虑更换client和server，本地PC作为client，开启Iperf server后默认网卡就是本地连接网卡，Server服务器开启Iperf client进行组播包的发送，以下是client PC的`netstat -gn`结果：
+
+```
+lo              1      224.0.0.251
+lo              1      224.0.0.1
+enp0s3          2      224.0.67.67
+enp0s3          1      224.0.0.251
+enp0s3          1      224.0.0.1
+enp0s8          1      224.0.0.251
+enp0s8          1      224.0.0.1
+lo              1      ff02::fb
+...
+```
+如果非要在Iperf使用了-B绑定组播地址的情况下再想指定对应的interface进行组播包的发送，可以[参考这里](https://sourceforge.net/p/iperf/mailman/message/19147976/):
+```
+the way I got around it was to create a static route whenever I needed
+to do it:
+
+route add 224.0.67.67 dev eth1  (this is assuming that "eth1" is the
+network device corresponding to the network interface whose hostname is
+"node2")
+```
+
+### 如何使用Ipv6发送组播包
+
+IP -V for IPv6，但是目前仅针对非link local的IPV6地址，如果要使用link local,需要再指定Interface，
+
+```
+example:
+iperf -V -u -c fe80::5bad:11e3:fc4e:1ede%enp0s3 -b 90M -t 2000 -i 1
+```
+
+参考：(看下面的回复)
+https://www.kuncar.net/blog/2018/how-to-test-ipv6-with-iperf/2012/
 
 
 
