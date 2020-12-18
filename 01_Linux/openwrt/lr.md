@@ -86,3 +86,5 @@ option http_proxy http://101.231.121.17:80/
 - 支持luci的jsonrpc接口：
 opkg install luci-mod-rpc
 /etc/init.d/uhttpd restart 
+
+- opkg install curl

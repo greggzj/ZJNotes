@@ -17,6 +17,10 @@ yield return value获取方式， 与yield from 不同
     in PEP 380.
 
 threads, callbacks, coroutines difference , good and bad
+    1) 500 lines project
+    2) callback all local context will lost (fluepy. p563)
+        callback exception handling 
+        
 
 
 guido different yield/yield from
