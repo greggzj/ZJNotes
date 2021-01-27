@@ -57,6 +57,9 @@ s -- Define the snaplength (size) of the capture in bytes. Use -s0 to get everyt
 
 ```
 tcpdump -vnes0 -i eth0 port 67 or 68
+
+#感觉用下面这个更好，能够很清楚地看到各种Option是否出现
+tcpdump -i br0 -vvv -s 1500 '((port 67 or port 68)
 ```
 
 ## tcpdump 的简单学习
